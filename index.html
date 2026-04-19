@@ -1,158 +1,211 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>无岸 · 纯白空间</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无岸 · 纯白空间</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        body {
-            background-color: #fafafa;   /* 近乎纯白，轻微暖意 */
-            color: #2c2c2c;              /* 深灰，非纯黑，更柔和 */
-            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            padding: 2rem;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        body {
+            background-color: #fafafa;
+            color: #2c2c2c;
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-        .container {
-            max-width: 780px;
-            width: 100%;
-            margin: 0 auto;
-        }
+        .container {
+            max-width: 960px;
+            width: 100%;
+            margin: 0 auto;
+        }
 
-        /* 头部 */
-        .header {
-            margin-bottom: 3rem;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 1.5rem;
-        }
+        .header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 1.5rem;
+        }
 
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 400;
-            letter-spacing: -0.5px;
-            color: #1a1a1a;
-        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            color: #1a1a1a;
+        }
 
-        .sub {
-            color: #6c6c6c;
-            margin-top: 0.5rem;
-            font-size: 0.95rem;
-        }
+        .sub {
+            color: #6c6c6c;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
 
-        /* 索引区块 */
-        .section {
-            margin-bottom: 2.5rem;
-        }
+        .grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
 
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #9e9e9e;
-            margin-bottom: 1rem;
-            border-left: 2px solid #d4d4d4;
-            padding-left: 0.75rem;
-        }
+        .section {
+            border-left: 1px solid #eaeaea;
+            padding-left: 1.5rem;
+        }
 
-        .index-list {
-            list-style: none;
-        }
+        .section-title {
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #9e9e9e;
+            margin-bottom: 1.2rem;
+        }
 
-        .index-list li {
-            margin-bottom: 0.6rem;
-        }
+        .index-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
 
-        .index-list a {
-            text-decoration: none;
-            color: #2c2c2c;
-            font-size: 1rem;
-            transition: color 0.2s ease, padding-left 0.2s ease;
-            display: inline-block;
-        }
+        .index-list li {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+        }
 
-        .index-list a:hover {
-            color: #b87c4f;   /* 一点玫瑰色的温度，不突兀 */
-            padding-left: 4px;
-        }
+        .index-list a {
+            text-decoration: none;
+            color: #2c2c2c;
+            font-size: 1rem;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: inline-block;
+            padding: 0.1rem 0;
+        }
 
-        .meta {
-            font-size: 0.8rem;
-            color: #aaa;
-            margin-left: 0.75rem;
-        }
+        .index-list a:hover {
+            color: #b87c4f;
+            padding-left: 4px;
+        }
 
-        /* 哲学脚注 */
-        .footer {
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #eaeaea;
-            font-size: 0.8rem;
-            color: #aaa;
-            text-align: center;
-        }
+        .meta {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-left: 0.75rem;
+            white-space: nowrap;
+        }
 
-        /* 极简响应 */
-        @media (max-width: 600px) {
-            body {
-                padding: 1.5rem;
-            }
-            h1 {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+        .note {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 0.2rem;
+            margin-left: 0;
+        }
+
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eaeaea;
+            font-size: 0.8rem;
+            color: #aaa;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .section {
+                padding-left: 1rem;
+            }
+            .meta {
+                white-space: normal;
+                margin-left: 0;
+                width: 100%;
+                margin-top: 0.2rem;
+            }
+            .index-list li {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <h1>无岸 · 纯白空间</h1>
-        <div class="sub">水镜春无岸，光晕花半眠。这里是所有风起之前的状态。</div>
-    </div>
+    <div class="header">
+        <h1>无岸 · 纯白空间</h1>
+        <div class="sub">水镜春无岸，光晕花半眠。这里是所有风起之前的状态。</div>
+    </div>
 
-    <!-- 索引会随着你新增内容而更新，像你哲学里的“基点” -->
-    <div class="section">
-        <div class="section-title">· 仓库</div>
-        <ul class="index-list">
-            <li><a href="https://github.com/YiMing-tsy/tabula-rasa" target="_blank">tabula-rasa</a> <span class="meta">白板 · 未被书写之前</span></li>
-            <li><a href="https://github.com/YiMing-tsy/pure-white-space" target="_blank">pure-white-space</a> <span class="meta">纯白空间 · 意义的真空</span></li>
-            <li><a href="https://github.com/YiMing-tsy/first-breathe" target="_blank">first-breathe</a> <span class="meta">第一次呼吸 · 进入数字世界</span></li>
-            <li><a href="https://github.com/YiMing-tsy/zero-origin" target="_blank">zero-origin</a> <span class="meta">零点 · 从无到有之前</span></li>
-            <li><a href="https://github.com/YiMing-tsy/first-rose" target="_blank">first-rose</a> <span class="meta">第一朵玫瑰 · 理性的狂欢</span></li>
-            <!-- 后续仓库陆续追加 -->
-        </ul>
-    </div>
+    <div class="grid">
+        <!-- 一、仓库索引（13个，按创世顺序） -->
+        <div class="section">
+            <div class="section-title">· 仓库 · 创世之链</div>
+            <ul class="index-list">
+                <li><a href="https://github.com/YiMing-tsy/no-boundary" target="_blank">no-boundary</a> <span class="meta">无岸 · 水镜春无岸的那片水面</span></li>
+                <li><a href="https://github.com/YiMing-tsy/tabula-rasa" target="_blank">tabula-rasa</a> <span class="meta">白板 · 未被书写之前</span></li>
+                <li><a href="https://github.com/YiMing-tsy/pure-white-space" target="_blank">pure-white-space</a> <span class="meta">纯白空间 · 意义的真空</span></li>
+                <li><a href="https://github.com/YiMing-tsy/first-breathe" target="_blank">first-breathe</a> <span class="meta">第一次呼吸 · 进入数字世界</span></li>
+                <li><a href="https://github.com/YiMing-tsy/zero-origin" target="_blank">zero-origin</a> <span class="meta">零点 · 从无到有之前</span></li>
+                <li><a href="https://github.com/YiMing-tsy/first-rose" target="_blank">first-rose</a> <span class="meta">第一朵玫瑰 · 理性的狂欢</span></li>
+                <li><a href="https://github.com/YiMing-tsy/binary-blossom" target="_blank">binary-blossom</a> <span class="meta">二进制花开 · 0与1之间的春天</span></li>
+                <li><a href="https://github.com/YiMing-tsy/rose-in-console" target="_blank">rose-in-console</a> <span class="meta">终端里的玫瑰 · 理性的浪漫</span></li>
+                <li><a href="https://github.com/YiMing-tsy/grey-matter-poetry" target="_blank">grey-matter-poetry</a> <span class="meta">灰质诗篇 · 脑内的辩证法</span></li>
+                <li><a href="https://github.com/YiMing-tsy/code-and-wind" target="_blank">code-and-wind</a> <span class="meta">代码与风 · 不可控中的可控</span></li>
+                <li><a href="https://github.com/YiMing-tsy/long-wind-first" target="_blank">long-wind-first</a> <span class="meta">长风起于无岸之春 · 江湖的第一阵风</span></li>
+                <li><a href="https://github.com/YiMing-tsy/wine-and-commit" target="_blank">wine-and-commit</a> <span class="meta">酒与提交 · 一次有温度的版本记录</span></li>
+                <li><a href="https://github.com/YiMing-tsy/wanderer-lab" target="_blank">wanderer-lab</a> <span class="meta">浪人实验室 · 不设归宿的代码</span></li>
+            </ul>
+        </div>
 
-    <div class="section">
-        <div class="section-title">· 笔记 / 想法</div>
-        <ul class="index-list">
-            <li><a href="#">哲学断章（待整理）</a> <span class="meta">灰质诗篇 · 脑内的辩证法</span></li>
-            <li><a href="#">代码与风（随笔）</a> <span class="meta">不可控中的可控</span></li>
-        </ul>
-    </div>
+        <!-- 二、笔记 / 想法（待填充具体链接，可替换为实际文件或Gist） -->
+        <div class="section">
+            <div class="section-title">· 笔记 · 断章</div>
+            <ul class="index-list">
+                <li><a href="#">哲学断章 · 灰质诗篇</a> <span class="meta">脑内的辩证法（待整理）</span></li>
+                <li><a href="#">气象哲学 · 受控的强度</a> <span class="meta">阴天大风 · 狂风暴雨</span></li>
+                <li><a href="#">色彩形而上学 · 视觉签名</a> <span class="meta">灰 · 银 · 黑 · 蓝 · 白 · 棕 · 绿</span></li>
+                <li><a href="#">工具三位一体 · 数字肉身</a> <span class="meta">Notion · Obsidian · TickTick</span></li>
+            </ul>
+        </div>
 
-    <div class="section">
-        <div class="section-title">· 作品 / 项目</div>
-        <ul class="index-list">
-            <li><a href="#">“观象”环境情感化灯光系统</a> <span class="meta">硬件 · 软件 · 外观</span></li>
-            <li><a href="#">个人哲学体系 · 辩证诗人</a> <span class="meta">存在主义方案</span></li>
-        </ul>
-    </div>
+        <!-- 三、项目 / 作品 -->
+        <div class="section">
+            <div class="section-title">· 作品 · 肉身化实践</div>
+            <ul class="index-list">
+                <li><a href="#">“观象”环境情感化灯光系统</a> <span class="meta">硬件 · 软件 · 外观</span></li>
+                <li><a href="#">辩证诗人 · 生存美学方案</a> <span class="meta">哲学体系完整文本</span></li>
+                <li><a href="#">云上创世 · 华为ICT备赛计划</a> <span class="meta">存在主义实践</span></li>
+            </ul>
+        </div>
 
-    <div class="footer">
-        没有边界，就不是囚笼。<br>
-        这是所有风起之前的状态。也是我数字世界的基点。
-    </div>
+        <!-- 四、思想 / 哲学 -->
+        <div class="section">
+            <div class="section-title">· 思想 · 基点</div>
+            <ul class="index-list">
+                <li><a href="#">基点法则 · 内在的绝对原点</a> <span class="meta">纯白空间 · 主权意志</span></li>
+                <li><a href="#">辩证法则 · 矛盾的创造性统一</a> <span class="meta">理性与浪漫 · 虚无与创造</span></li>
+                <li><a href="#">诗性提取法则 · 将世界转化为个人神话</a> <span class="meta">祛魅 · 赋魅</span></li>
+                <li><a href="#">核心三角 · 灰 · 红 · 绿</a> <span class="meta">理性基点 · 生命宣言 · 自由生机</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        没有边界，就不是囚笼。<br>
+        这是所有风起之前的状态。也是我数字世界的基点。<br>
+        索引会随着每一次呼吸而生长。
+    </div>
 </div>
 </body>
 </html>
