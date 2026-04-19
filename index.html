@@ -1,276 +1,285 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>无岸 · 意识流索引</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>无岸 · 李白醉意识流 · 纯白空间</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #fefcf8;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: "华文行书", "STXingkai", "华文楷书", "KaiTi", "Bradley Hand", "Apple Chancery", cursive;
+            font-weight: 500;
+            font-style: italic;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.03), 2px 2px 0 rgba(0,0,0,0.02);
+            color: #2b2b2b;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(210,190,170,0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .drift-piece {
+            position: absolute;
+            z-index: 10;
+            max-width: 280px;
+            background: rgba(255, 255, 245, 0.6);
+            backdrop-filter: blur(2px);
+            border-radius: 2px;
+            padding: 0.8rem 1.2rem;
+            border: 0.5px solid rgba(150, 130, 110, 0.15);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: all 0.25s ease-out;
+            cursor: default;
+            word-break: break-word;
+            font-style: italic;
+            transform-origin: center;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.02);
+        }
+        .drift-piece:hover {
+            background: rgba(255, 255, 245, 0.92);
+            transform: translate(2px, -2px) scale(1.01) skew(0deg);
+            box-shadow: 0 12px 22px -12px rgba(0,0,0,0.1);
+            border-color: rgba(180, 140, 110, 0.3);
+            backdrop-filter: blur(1px);
+            z-index: 200 !important;
+            font-style: normal;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.08);
+        }
+        .drift-piece.glow {
+            box-shadow: 0 0 12px rgba(184, 124, 79, 0.2);
+            border-color: rgba(184, 124, 79, 0.4);
+        }
+        .drift-piece a {
+            text-decoration: none;
+            color: inherit;
+            border-bottom: 0.5px dotted rgba(100,80,60,0.2);
+            transition: color 0.2s;
+        }
+        .drift-piece a:hover {
+            color: #b87c4f;
+            border-bottom-color: #b87c4f;
+        }
+        .layer-faint { opacity: 0.55; filter: blur(0.3px); }
+        .layer-mid { opacity: 0.75; }
+        .layer-strong { opacity: 0.95; }
 
-        body {
-            background: #fefaf5;  /* 纸色基底，像旧宣纸 */
-            color: #2c2c2c;
-            font-family: 'Times New Roman', 'Georgia', '宋体', 'Noto Serif SC', serif;
-            line-height: 1.7;
-            font-weight: 400;
-            padding: 2rem 1.5rem;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        /* 意识流背景：水纹 + 光晕 */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 40%, rgba(210, 180, 140, 0.08) 0%, rgba(250, 240, 230, 0) 70%),
-                        repeating-linear-gradient(45deg, rgba(180, 160, 130, 0.02) 0px, rgba(180, 160, 130, 0.02) 2px, transparent 2px, transparent 8px);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* 意识流头部：非对称、留白、诗意 */
-        .header {
-            margin-bottom: 4rem;
-            text-align: left;
-            border: none;
-            padding-bottom: 1rem;
-            position: relative;
-        }
-
-        .header h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            letter-spacing: -0.01em;
-            color: #3a2c1f;
-            line-height: 1.2;
-            font-family: 'Times New Roman', 'Georgia', serif;
-            background: linear-gradient(135deg, #5a4a3a 0%, #8e7a66 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 2px 2px 12px rgba(0,0,0,0.05);
-        }
-
-        .sub {
-            font-size: 1rem;
-            color: #9b8a76;
-            margin-top: 0.75rem;
-            font-style: italic;
-            border-left: 1px solid #e2d8cd;
-            padding-left: 1.2rem;
-            letter-spacing: 1px;
-        }
-
-        /* 意识流网格 —— 像散落的诗节 */
-        .stream-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-        }
-
-        .stream-section {
-            border: none;
-            padding: 0;
-            position: relative;
-        }
-
-        .section-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: #c0aa8a;
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-            border: none;
-            padding: 0;
-            background: none;
-            opacity: 0.7;
-        }
-
-        /* 索引列表 — 像诗句分行 */
-        .index-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .index-list li {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: baseline;
-            border-bottom: 0.5px dashed #e6ddd2;
-            padding-bottom: 0.6rem;
-            transition: all 0.2s ease;
-        }
-
-        .index-list li:hover {
-            border-bottom-color: #b87c4f;
-            padding-left: 0.3rem;
-        }
-
-        .index-list a {
-            text-decoration: none;
-            color: #3e3327;
-            font-size: 1.1rem;
-            font-weight: 400;
-            transition: color 0.2s, font-style 0.2s;
-            font-family: 'Times New Roman', 'Georgia', serif;
-            letter-spacing: 0.3px;
-        }
-
-        .index-list a:hover {
-            color: #b45f2b;
-            font-style: italic;
-        }
-
-        .meta {
-            font-size: 0.75rem;
-            color: #bcab97;
-            margin-left: 1rem;
-            font-family: 'Segoe UI', sans-serif;
-            font-style: normal;
-            letter-spacing: 0.2px;
-        }
-
-        /* 意识流插句 — 漂浮的诗行 */
-        .floating-poem {
-            margin: 3rem 0 2rem;
-            text-align: right;
-            font-size: 0.85rem;
-            color: #c2b09b;
-            font-style: italic;
-            border-top: none;
-            padding-top: 1rem;
-            position: relative;
-        }
-
-        .floating-poem::before {
-            content: "✧";
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 1rem;
-            color: #dec5a5;
-        }
-
-        .footer {
-            margin-top: 4rem;
-            text-align: center;
-            font-size: 0.7rem;
-            color: #ccbcab;
-            letter-spacing: 1px;
-            border-top: 1px solid #f0e8df;
-            padding-top: 2rem;
-        }
-
-        /* 移动端适配：意识流依然保留呼吸 */
-        @media (max-width: 680px) {
-            body {
-                padding: 1.2rem;
-            }
-            .header h1 {
-                font-size: 2.4rem;
-            }
-            .index-list li {
-                flex-direction: column;
-                gap: 0.2rem;
-            }
-            .meta {
-                margin-left: 0;
-            }
-            .floating-poem {
-                text-align: left;
-            }
-        }
-    </style>
+        .dust {
+            position: absolute;
+            background: #cbc3b5;
+            border-radius: 50%;
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .watermark-quote {
+            position: fixed;
+            bottom: 20px;
+            right: 24px;
+            font-size: 0.7rem;
+            color: #cfc7bc;
+            z-index: 99;
+            font-style: italic;
+            letter-spacing: 1px;
+            pointer-events: none;
+            font-family: inherit;
+            transform: skew(-3deg);
+        }
+        @keyframes softDrift {
+            0% { transform: translate(0, 0) rotate(0deg) skew(-2deg); }
+            100% { transform: translate(3px, 2px) rotate(0.5deg) skew(-2deg); }
+        }
+        .animate-drift {
+            animation: softDrift 6s infinite alternate ease-in-out;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h1>无岸 · 意识流索引</h1>
-        <div class="sub">水镜春无岸，光晕花半眠。<br>长风、烈酒、天涯——都在这片水面之下。</div>
-    </div>
+<div id="drift-container" style="position: relative; width: 100%; min-height: 100vh; padding-bottom: 80px;"></div>
+<div class="watermark-quote">长风不系舟，醒醉皆无岸</div>
 
-    <div class="stream-grid">
-        <!-- 仓库 —— 创世之链（诗行版） -->
-        <div class="stream-section">
-            <div class="section-title">· 创世 · 十三行</div>
-            <ul class="index-list">
-                <li><a href="https://github.com/YiMing-tsy/no-boundary" target="_blank">no-boundary</a> <span class="meta">无岸 · 水镜春无岸的那片水面</span></li>
-                <li><a href="https://github.com/YiMing-tsy/tabula-rasa" target="_blank">tabula-rasa</a> <span class="meta">白板 · 未被书写之前</span></li>
-                <li><a href="https://github.com/YiMing-tsy/pure-white-space" target="_blank">pure-white-space</a> <span class="meta">纯白空间 · 意义的真空</span></li>
-                <li><a href="https://github.com/YiMing-tsy/first-breathe" target="_blank">first-breathe</a> <span class="meta">第一次呼吸 · 进入数字世界</span></li>
-                <li><a href="https://github.com/YiMing-tsy/zero-origin" target="_blank">zero-origin</a> <span class="meta">零点 · 从无到有之前</span></li>
-                <li><a href="https://github.com/YiMing-tsy/first-rose" target="_blank">first-rose</a> <span class="meta">第一朵玫瑰 · 理性的狂欢</span></li>
-                <li><a href="https://github.com/YiMing-tsy/binary-blossom" target="_blank">binary-blossom</a> <span class="meta">二进制花开 · 0与1之间的春天</span></li>
-                <li><a href="https://github.com/YiMing-tsy/rose-in-console" target="_blank">rose-in-console</a> <span class="meta">终端里的玫瑰 · 理性的浪漫</span></li>
-                <li><a href="https://github.com/YiMing-tsy/grey-matter-poetry" target="_blank">grey-matter-poetry</a> <span class="meta">灰质诗篇 · 脑内的辩证法</span></li>
-                <li><a href="https://github.com/YiMing-tsy/code-and-wind" target="_blank">code-and-wind</a> <span class="meta">代码与风 · 不可控中的可控</span></li>
-                <li><a href="https://github.com/YiMing-tsy/long-wind-first" target="_blank">long-wind-first</a> <span class="meta">长风起于无岸之春 · 江湖的第一阵风</span></li>
-                <li><a href="https://github.com/YiMing-tsy/wine-and-commit" target="_blank">wine-and-commit</a> <span class="meta">酒与提交 · 一次有温度的版本记录</span></li>
-                <li><a href="https://github.com/YiMing-tsy/wanderer-lab" target="_blank">wanderer-lab</a> <span class="meta">浪人实验室 · 不设归宿的代码</span></li>
-            </ul>
-        </div>
+<script>
+    const pieces = [
+        { text: "no-boundary · 无岸", link: "https://github.com/YiMing-tsy/no-boundary", desc: "水镜春无岸的那片水面，也是那个岸。", layer: "layer-strong" },
+        { text: "tabula-rasa · 白板", link: "https://github.com/YiMing-tsy/tabula-rasa", desc: "未被书写之前。", layer: "layer-mid" },
+        { text: "pure-white-space · 纯白空间", link: "https://github.com/YiMing-tsy/pure-white-space", desc: "意义的真空，主权意志的发射台。", layer: "layer-strong" },
+        { text: "first-breathe · 第一次呼吸", link: "https://github.com/YiMing-tsy/first-breathe", desc: "Hello, world.", layer: "layer-faint" },
+        { text: "zero-origin · 零点", link: "https://github.com/YiMing-tsy/zero-origin", desc: "从无到有之前的那一格。", layer: "layer-mid" },
+        { text: "first-rose · 第一朵玫瑰", link: "https://github.com/YiMing-tsy/first-rose", desc: "理性的狂欢。", layer: "layer-strong" },
+        { text: "binary-blossom · 二进制花开", link: "https://github.com/YiMing-tsy/binary-blossom", desc: "0与1之间的春天。", layer: "layer-faint" },
+        { text: "rose-in-console · 终端里的玫瑰", link: "https://github.com/YiMing-tsy/rose-in-console", desc: "当printf开出花来。", layer: "layer-mid" },
+        { text: "grey-matter-poetry · 灰质诗篇", link: "https://github.com/YiMing-tsy/grey-matter-poetry", desc: "神经元里住着诗人与程序员。", layer: "layer-strong" },
+        { text: "code-and-wind · 代码与风", link: "https://github.com/YiMing-tsy/code-and-wind", desc: "捕捉风的程序。", layer: "layer-faint" },
+        { text: "long-wind-first · 长风", link: "https://github.com/YiMing-tsy/long-wind-first", desc: "长风起于无岸之春。", layer: "layer-mid" },
+        { text: "wine-and-commit · 酒与提交", link: "https://github.com/YiMing-tsy/wine-and-commit", desc: "每一个commit都像一口烈酒。", layer: "layer-strong" },
+        { text: "wanderer-lab · 浪人实验室", link: "https://github.com/YiMing-tsy/wanderer-lab", desc: "没有围墙，只有天涯。", layer: "layer-mid" },
+        { text: "观象 · 环境情感化灯光系统", link: "#", desc: "硬件 · 软件 · 外观", layer: "layer-faint", isNote: true },
+        { text: "辩证诗人 · 存在主义方案", link: "#", desc: "灰质诗篇的形质", layer: "layer-mid", isNote: true },
+        { text: "长风计划 · 第一个开源工具", link: "#", desc: "江湖的第一阵风", layer: "layer-faint", isNote: true },
+        { text: "气象哲学 · 阴天大风与理性宁静", link: "#", desc: "内在状态的外部映射", layer: "layer-strong", isNote: true },
+        { text: "玫瑰色辩证", link: "#", desc: "理性狂欢的隐喻", layer: "layer-mid", isNote: true }
+    ];
 
-        <!-- 笔记 · 断章（意识流碎片） -->
-        <div class="stream-section">
-            <div class="section-title">· 断章 · 未写完的笔记</div>
-            <ul class="index-list">
-                <li><a href="#">哲学断章 · 灰质诗篇</a> <span class="meta">脑内的辩证法</span></li>
-                <li><a href="#">气象哲学 · 受控的强度</a> <span class="meta">阴天大风 / 狂风暴雨</span></li>
-                <li><a href="#">色彩形而上学 · 视觉签名</a> <span class="meta">灰 · 银 · 黑 · 蓝 · 白 · 棕 · 绿</span></li>
-                <li><a href="#">工具三位一体 · 数字肉身</a> <span class="meta">Notion / Obsidian / TickTick</span></li>
-            </ul>
-        </div>
+    const container = document.getElementById('drift-container');
+    let winWidth = window.innerWidth;
+    let winHeight = window.innerHeight;
+    let pieceElements = [];
 
-        <!-- 作品 · 肉身化实践 -->
-        <div class="stream-section">
-            <div class="section-title">· 肉身 · 作品</div>
-            <ul class="index-list">
-                <li><a href="#">“观象”环境情感化灯光系统</a> <span class="meta">硬件 · 软件 · 外观</span></li>
-                <li><a href="#">辩证诗人 · 生存美学方案</a> <span class="meta">哲学体系完整文本</span></li>
-                <li><a href="#">云上创世 · 华为ICT备赛计划</a> <span class="meta">存在主义实践</span></li>
-            </ul>
-        </div>
+    function getRandomPosition(w, h) {
+        const maxX = winWidth - w - 40;
+        const maxY = winHeight - h - 40;
+        let x = Math.random() * maxX + 20;
+        let y = Math.random() * maxY + 20;
+        x = Math.min(Math.max(x, 20), winWidth - w - 20);
+        y = Math.min(Math.max(y, 20), winHeight - h - 20);
+        return { x, y };
+    }
 
-        <!-- 思想 · 基点 -->
-        <div class="stream-section">
-            <div class="section-title">· 基点 · 思想</div>
-            <ul class="index-list">
-                <li><a href="#">基点法则 · 内在的绝对原点</a> <span class="meta">纯白空间 / 主权意志</span></li>
-                <li><a href="#">辩证法则 · 矛盾的创造性统一</a> <span class="meta">理性与浪漫 · 虚无与创造</span></li>
-                <li><a href="#">诗性提取法则 · 将世界转化为个人神话</a> <span class="meta">祛魅 · 赋魅</span></li>
-                <li><a href="#">核心三角 · 灰 · 红 · 绿</a> <span class="meta">理性基点 · 生命宣言 · 自由生机</span></li>
-            </ul>
-        </div>
-    </div>
+    function createPiece(piece, index) {
+        const div = document.createElement('div');
+        div.className = `drift-piece ${piece.layer}`;
+        const titleLink = piece.link && piece.link !== '#' 
+            ? `<a href="${piece.link}" target="_blank">${piece.text}</a>` 
+            : `<span style="opacity:0.8;">${piece.text}</span>`;
+        div.innerHTML = `
+            <div style="font-size: 0.85rem; margin-bottom: 6px; font-weight: 500;">${titleLink}</div>
+            <div style="font-size: 0.7rem; color: #8a7a6a; line-height: 1.3;">${piece.desc}</div>
+        `;
+        div.style.position = 'absolute';
+        div.style.visibility = 'hidden';
+        document.body.appendChild(div);
+        const rect = div.getBoundingClientRect();
+        const w = rect.width;
+        const h = rect.height;
+        document.body.removeChild(div);
+        
+        const { x, y } = getRandomPosition(w, h);
+        div.style.left = `${x}px`;
+        div.style.top = `${y}px`;
+        div.style.visibility = 'visible';
+        const rotate = (Math.random() - 0.5) * 5;
+        div.style.transform = `rotate(${rotate}deg) skew(-2deg)`;
+        
+        container.appendChild(div);
+        return { div, w, h, baseLeft: x, baseTop: y, layer: piece.layer };
+    }
 
-    <!-- 意识流漂浮诗句 -->
-    <div class="floating-poem">
-        长风不系舟 · 烈酒不辞杯 · 天涯不回头
-    </div>
+    function layoutPieces() {
+        container.innerHTML = '';
+        pieceElements = [];
+        pieces.forEach((piece, idx) => {
+            const obj = createPiece(piece, idx);
+            pieceElements.push(obj);
+        });
+        for (let i = 0; i < pieceElements.length; i++) {
+            for (let j = i+1; j < pieceElements.length; j++) {
+                const a = pieceElements[i].div.getBoundingClientRect();
+                const b = pieceElements[j].div.getBoundingClientRect();
+                if (Math.abs(a.left - b.left) < 40 && Math.abs(a.top - b.top) < 40) {
+                    const newLeft = parseFloat(pieceElements[j].div.style.left) + 35;
+                    const newTop = parseFloat(pieceElements[j].div.style.top) + 25;
+                    if (newLeft + pieceElements[j].w < winWidth - 20 && newTop + pieceElements[j].h < winHeight - 20) {
+                        pieceElements[j].div.style.left = `${newLeft}px`;
+                        pieceElements[j].div.style.top = `${newTop}px`;
+                        pieceElements[j].baseLeft = newLeft;
+                        pieceElements[j].baseTop = newTop;
+                    }
+                }
+            }
+        }
+    }
 
-    <div class="footer">
-        没有边界，就不是囚笼。<br>
-        这是所有风起之前的状态。也是我数字世界的意识流基点。
-    </div>
-</div>
+    function startAutoDrift() {
+        setInterval(() => {
+            pieceElements.forEach(p => {
+                const deltaX = (Math.random() - 0.5) * 8;
+                const deltaY = (Math.random() - 0.5) * 6;
+                let newLeft = p.baseLeft + deltaX;
+                let newTop = p.baseTop + deltaY;
+                newLeft = Math.min(Math.max(newLeft, 10), winWidth - p.w - 10);
+                newTop = Math.min(Math.max(newTop, 10), winHeight - p.h - 10);
+                p.div.style.left = `${newLeft}px`;
+                p.div.style.top = `${newTop}px`;
+                p.baseLeft = newLeft;
+                p.baseTop = newTop;
+                p.div.classList.add('animate-drift');
+                setTimeout(() => p.div.classList.remove('animate-drift'), 600);
+            });
+        }, 4500);
+    }
+
+    function addProximityGlow() {
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            pieceElements.forEach(p => {
+                const rect = p.div.getBoundingClientRect();
+                const centerX = rect.left + rect.width/2;
+                const centerY = rect.top + rect.height/2;
+                const dist = Math.hypot(mouseX - centerX, mouseY - centerY);
+                if (dist < 120) {
+                    p.div.classList.add('glow');
+                } else {
+                    p.div.classList.remove('glow');
+                }
+            });
+        });
+    }
+
+    function addBlurOnClick() {
+        document.body.addEventListener('click', () => {
+            pieceElements.forEach(p => {
+                p.div.style.backdropFilter = 'blur(3px)';
+                setTimeout(() => {
+                    p.div.style.backdropFilter = '';
+                }, 200);
+            });
+        });
+    }
+
+    function createDust() {
+        const dustCount = 80;
+        for (let i = 0; i < dustCount; i++) {
+            const dust = document.createElement('div');
+            dust.className = 'dust';
+            const size = Math.random() * 3 + 1;
+            dust.style.width = size + 'px';
+            dust.style.height = size + 'px';
+            dust.style.left = Math.random() * 100 + '%';
+            dust.style.top = Math.random() * 100 + '%';
+            dust.style.opacity = Math.random() * 0.3;
+            document.body.appendChild(dust);
+        }
+    }
+
+    function init() {
+        layoutPieces();
+        startAutoDrift();
+        addProximityGlow();
+        addBlurOnClick();
+        createDust();
+        window.addEventListener('resize', () => {
+            winWidth = window.innerWidth;
+            winHeight = window.innerHeight;
+            layoutPieces();
+        });
+    }
+
+    init();
+</script>
 </body>
 </html>
