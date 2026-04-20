@@ -3,25 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>无岸 · 李白醉意识流 · 纯白空间</title>
+    <title>无岸 · 呼吸故障 · 纯白空间</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            background: #fefcf8;
+            background: #0a0a0f;
             min-height: 100vh;
             overflow-x: hidden;
-            font-family: "华文行书", "STXingkai", "华文楷书", "KaiTi", "Bradley Hand", "Apple Chancery", cursive;
+            font-family: 'Ma Shan Zheng', '华文行书', 'STXingkai', 'Noto Serif SC', cursive;
             font-weight: 500;
             font-style: italic;
             letter-spacing: 1px;
-            text-shadow: 1px 1px 0 rgba(0,0,0,0.03), 2px 2px 0 rgba(0,0,0,0.02);
-            color: #2b2b2b;
+            color: #d0d0ff;
             -webkit-font-smoothing: antialiased;
+            position: relative;
+            animation: breathBackground 8s ease-in-out infinite;
         }
+
+        @keyframes breathBackground {
+            0% { background: #0a0a0f; }
+            50% { background: #12121c; }
+            100% { background: #0a0a0f; }
+        }
+
         body::before {
             content: "";
             position: fixed;
@@ -29,88 +39,348 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 30% 40%, rgba(210,190,170,0.05) 0%, transparent 70%);
+            background: repeating-linear-gradient(0deg, rgba(0, 255, 255, 0.02) 0px, rgba(0, 255, 255, 0.02) 1px, transparent 1px, transparent 4px);
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
+            mix-blend-mode: screen;
         }
+
+        @keyframes rgbShift {
+            0% { text-shadow: -2px 0 #E34234, 2px 0 cyan; opacity: 0.8; }
+            20% { text-shadow: -3px 0 #E34234, 3px 0 #E34234; opacity: 0.9; }
+            40% { text-shadow: 2px 0 #E34234, -2px 0 cyan; opacity: 0.7; }
+            60% { text-shadow: 0 2px #E34234, 0 -2px cyan; opacity: 1; }
+            80% { text-shadow: -1px -1px #E34234, 1px 1px cyan; opacity: 0.8; }
+            100% { text-shadow: -1px -1px #E34234, 1px 1px cyan; opacity: 0.8; }
+        }
+
+        @keyframes fullGlitch {
+            0% { opacity: 0; }
+            95% { opacity: 0; }
+            97% { opacity: 0.15; background: rgba(227, 66, 52, 0.15); mix-blend-mode: difference; }
+            98% { opacity: 0; background: rgba(0, 255, 200, 0.1); }
+            99% { opacity: 0.05; }
+            100% { opacity: 0; }
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            animation: fullGlitch 12s infinite;
+        }
+
         .drift-piece {
             position: absolute;
             z-index: 10;
             max-width: 280px;
-            background: rgba(255, 255, 245, 0.6);
-            backdrop-filter: blur(2px);
-            border-radius: 2px;
+            background: rgba(10, 10, 20, 0.65);
+            backdrop-filter: blur(4px);
+            border-radius: 4px;
             padding: 0.8rem 1.2rem;
-            border: 0.5px solid rgba(150, 130, 110, 0.15);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            transition: all 0.25s ease-out;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.2), inset 0 0 2px rgba(227, 66, 52, 0.2);
+            transition: all 0.2s ease;
             cursor: default;
             word-break: break-word;
             font-style: italic;
             transform-origin: center;
-            text-shadow: 1px 1px 0 rgba(0,0,0,0.02);
+            will-change: transform, opacity, box-shadow;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            color: #ccddff;
+            animation: pieceBreath 6s ease-in-out infinite;
         }
+
+        @keyframes pieceBreath {
+            0% { opacity: 0.7; transform: scale(1) translateZ(0); box-shadow: 0 0 6px rgba(0, 255, 255, 0.2); }
+            50% { opacity: 0.95; transform: scale(1.02) translateZ(0); box-shadow: 0 0 14px rgba(0, 255, 255, 0.4); }
+            100% { opacity: 0.7; transform: scale(1) translateZ(0); box-shadow: 0 0 6px rgba(0, 255, 255, 0.2); }
+        }
+
         .drift-piece:hover {
-            background: rgba(255, 255, 245, 0.92);
-            transform: translate(2px, -2px) scale(1.01) skew(0deg);
-            box-shadow: 0 12px 22px -12px rgba(0,0,0,0.1);
-            border-color: rgba(180, 140, 110, 0.3);
-            backdrop-filter: blur(1px);
+            background: rgba(0, 0, 0, 0.8);
+            transform: translate(2px, -2px) scale(1.02) skew(2deg) translateZ(0);
+            box-shadow: 0 0 20px cyan, 0 0 8px #E34234;
+            border-color: #E34234;
             z-index: 200 !important;
             font-style: normal;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.08);
+            animation: rgbShift 0.24s infinite alternate;
         }
         .drift-piece.glow {
-            box-shadow: 0 0 12px rgba(184, 124, 79, 0.2);
-            border-color: rgba(184, 124, 79, 0.4);
+            box-shadow: 0 0 15px cyan, 0 0 5px #E34234;
+            border-color: cyan;
         }
-        .drift-piece a {
-            text-decoration: none;
-            color: inherit;
-            border-bottom: 0.5px dotted rgba(100,80,60,0.2);
-            transition: color 0.2s;
-        }
-        .drift-piece a:hover {
-            color: #b87c4f;
-            border-bottom-color: #b87c4f;
-        }
-        .layer-faint { opacity: 0.55; filter: blur(0.3px); }
-        .layer-mid { opacity: 0.75; }
-        .layer-strong { opacity: 0.95; }
+        .layer-faint { opacity: 0.6; filter: blur(0.5px); animation: pieceBreath 7s ease-in-out infinite; }
+        .layer-mid { opacity: 0.8; animation: pieceBreath 5s ease-in-out infinite; }
+        .layer-strong { opacity: 1; animation: pieceBreath 4s ease-in-out infinite; }
 
-        .dust {
-            position: absolute;
-            background: #cbc3b5;
-            border-radius: 50%;
-            opacity: 0.25;
-            pointer-events: none;
-            z-index: 1;
+        .index-trigger {
+            position: fixed;
+            bottom: 28px;
+            left: 28px;
+            z-index: 300;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid cyan;
+            padding: 8px 18px;
+            border-radius: 0px;
+            font-size: 0.75rem;
+            font-family: monospace;
+            letter-spacing: 2px;
+            color: cyan;
+            cursor: pointer;
+            transition: 0.2s;
+            text-transform: uppercase;
+            font-style: normal;
+            animation: breathGlow 6s ease-in-out infinite, rgbShift 4s infinite;
         }
+
+        @keyframes breathGlow {
+            0% { box-shadow: 0 0 6px rgba(0, 255, 255, 0.3); border-color: cyan; }
+            50% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.7); border-color: #E34234; }
+            100% { box-shadow: 0 0 6px rgba(0, 255, 255, 0.3); border-color: cyan; }
+        }
+        .index-trigger:hover {
+            background: black;
+            box-shadow: 0 0 30px #E34234;
+            color: white;
+            border-color: #E34234;
+            animation: none;
+            transform: skew(-3deg);
+        }
+
+        .index-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            width: 85%;
+            max-width: 800px;
+            max-height: 80vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid cyan;
+            border-radius: 0px;
+            z-index: 1000;
+            padding: 1.8rem;
+            overflow-y: auto;
+            font-family: 'Noto Serif SC', monospace;
+            font-style: normal;
+            letter-spacing: 0.5px;
+            color: #e0e0ff;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            animation: overlayBreath 8s infinite;
+        }
+
+        @keyframes overlayBreath {
+            0% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.2); }
+            50% { box-shadow: 0 0 28px rgba(0, 255, 255, 0.5); }
+            100% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.2); }
+        }
+
+        .index-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* 分组标题 - 修改：去掉 letter-spacing 变化，平滑呼吸，不弹簧 */
+        .index-section h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #E34234;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px dashed cyan;
+            display: inline-block;
+            animation: titleBreath 4s ease-in-out infinite;
+            transform-origin: left center;
+        }
+
+        @keyframes titleBreath {
+            0% { opacity: 0.7; text-shadow: 0 0 0 cyan; transform: scale(1); }
+            50% { opacity: 1; text-shadow: 0 0 4px cyan, 0 0 2px rgba(0,255,255,0.5); transform: scale(1.01); }
+            100% { opacity: 0.7; text-shadow: 0 0 0 cyan; transform: scale(1); }
+        }
+
+        .index-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .index-list li {
+            font-size: 0.8rem;
+            font-family: monospace;
+            letter-spacing: 0;
+            border-left: 2px solid cyan;
+            padding-left: 8px;
+            transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            opacity: 0;
+            transform: translateY(8px);
+            animation: fadeInUp 0.3s ease forwards;
+            animation-fill-mode: forwards;
+        }
+
+        .index-list li:nth-child(1) { animation-delay: 0.02s; }
+        .index-list li:nth-child(2) { animation-delay: 0.05s; }
+        .index-list li:nth-child(3) { animation-delay: 0.08s; }
+        .index-list li:nth-child(4) { animation-delay: 0.11s; }
+        .index-list li:nth-child(5) { animation-delay: 0.14s; }
+        .index-list li:nth-child(6) { animation-delay: 0.17s; }
+        .index-list li:nth-child(7) { animation-delay: 0.20s; }
+        .index-list li:nth-child(8) { animation-delay: 0.23s; }
+        .index-list li:nth-child(9) { animation-delay: 0.26s; }
+        .index-list li:nth-child(10) { animation-delay: 0.29s; }
+        .index-list li:nth-child(11) { animation-delay: 0.32s; }
+        .index-list li:nth-child(12) { animation-delay: 0.35s; }
+        .index-list li:nth-child(13) { animation-delay: 0.38s; }
+        .index-list li:nth-child(14) { animation-delay: 0.41s; }
+        .index-list li:nth-child(15) { animation-delay: 0.44s; }
+        .index-list li:nth-child(16) { animation-delay: 0.47s; }
+        .index-list li:nth-child(17) { animation-delay: 0.50s; }
+        .index-list li:nth-child(18) { animation-delay: 0.53s; }
+        .index-list li:nth-child(19) { animation-delay: 0.56s; }
+        .index-list li:nth-child(20) { animation-delay: 0.59s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .index-list li:hover {
+            transform: translateX(4px) scale(1.02);
+            color: cyan;
+            text-shadow: 0 0 5px cyan;
+            border-left-color: #E34234;
+            box-shadow: -2px 0 8px rgba(0, 255, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .index-list li a {
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+        }
+        .index-list li a:hover {
+            text-decoration: underline;
+            text-decoration-color: cyan;
+        }
+
+        .close-index {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: cyan;
+            transition: 0.2s;
+        }
+        .close-index:hover {
+            text-shadow: 0 0 8px #E34234;
+            transform: rotate(90deg);
+        }
+
         .watermark-quote {
             position: fixed;
             bottom: 20px;
             right: 24px;
             font-size: 0.7rem;
-            color: #cfc7bc;
+            color: #88aaff;
             z-index: 99;
             font-style: italic;
             letter-spacing: 1px;
             pointer-events: none;
-            font-family: inherit;
+            font-family: 'Ma Shan Zheng', cursive;
             transform: skew(-3deg);
+            animation: breathText 5s ease-in-out infinite, rgbShift 6s infinite;
         }
+
+        @keyframes breathText {
+            0% { opacity: 0.3; text-shadow: -1px 0 #E34234, 1px 0 blue; }
+            50% { opacity: 0.8; text-shadow: -1px 0 #E34234, 1px 0 cyan; }
+            100% { opacity: 0.3; text-shadow: -1px 0 #E34234, 1px 0 blue; }
+        }
+
         @keyframes softDrift {
-            0% { transform: translate(0, 0) rotate(0deg) skew(-2deg); }
-            100% { transform: translate(3px, 2px) rotate(0.5deg) skew(-2deg); }
+            0% { transform: translate(0, 0) rotate(0deg) skew(-1deg) translateZ(0); }
+            100% { transform: translate(4px, 3px) rotate(1deg) skew(-1deg) translateZ(0); }
         }
         .animate-drift {
-            animation: softDrift 6s infinite alternate ease-in-out;
+            animation: softDrift 7s infinite alternate ease-in-out;
         }
+
+        .index-overlay::-webkit-scrollbar { width: 4px; }
+        .index-overlay::-webkit-scrollbar-track { background: #111; }
+        .index-overlay::-webkit-scrollbar-thumb { background: cyan; }
+        .dust, .dot, .grid { display: none; }
     </style>
 </head>
 <body>
+
 <div id="drift-container" style="position: relative; width: 100%; min-height: 100vh; padding-bottom: 80px;"></div>
-<div class="watermark-quote">长风不系舟，醒醉皆无岸</div>
+<div class="index-trigger" id="indexTrigger">◈ 索引 · 形质 ◈</div>
+<div class="watermark-quote">长风不系舟，醒醉皆无岸 · 呼吸之间</div>
+
+<div id="indexOverlay" class="index-overlay">
+    <div class="close-index" id="closeIndex">✖</div>
+    <h3>⛓️ 无岸索引 · 意识流归档 ⛓️</h3>
+    
+    <div class="index-section">
+        <h4>【原点 · 仓库序列】</h4>
+        <ul class="index-list">
+            <li><a href="https://github.com/YiMing-tsy/no-boundary" target="_blank">no-boundary · 无岸</a></li>
+            <li><a href="https://github.com/YiMing-tsy/tabula-rasa" target="_blank">tabula-rasa · 白板</a></li>
+            <li><a href="https://github.com/YiMing-tsy/pure-white-space" target="_blank">pure-white-space · 纯白空间</a></li>
+            <li><a href="https://github.com/YiMing-tsy/first-breathe" target="_blank">first-breathe · 第一次呼吸</a></li>
+            <li><a href="https://github.com/YiMing-tsy/zero-origin" target="_blank">zero-origin · 零点</a></li>
+            <li><a href="https://github.com/YiMing-tsy/first-rose" target="_blank">first-rose · 第一朵玫瑰</a></li>
+            <li><a href="https://github.com/YiMing-tsy/binary-blossom" target="_blank">binary-blossom · 二进制花开</a></li>
+            <li><a href="https://github.com/YiMing-tsy/rose-in-console" target="_blank">rose-in-console · 终端里的玫瑰</a></li>
+            <li><a href="https://github.com/YiMing-tsy/grey-matter-poetry" target="_blank">grey-matter-poetry · 灰质诗篇</a></li>
+            <li><a href="https://github.com/YiMing-tsy/code-and-wind" target="_blank">code-and-wind · 代码与风</a></li>
+            <li><a href="https://github.com/YiMing-tsy/long-wind-first" target="_blank">long-wind-first · 长风</a></li>
+            <li><a href="https://github.com/YiMing-tsy/wine-and-commit" target="_blank">wine-and-commit · 酒与提交</a></li>
+            <li><a href="https://github.com/YiMing-tsy/wanderer-lab" target="_blank">wanderer-lab · 浪人实验室</a></li>
+        </ul>
+    </div>
+
+    <div class="index-section">
+        <h4>【形质 · 笔记与哲思】</h4>
+        <ul class="index-list">
+            <li><a href="#" title="待整理">观象 · 环境情感化灯光系统</a></li>
+            <li><a href="#" title="待整理">辩证诗人 · 存在主义方案</a></li>
+            <li><a href="#" title="待整理">长风计划 · 第一个开源工具</a></li>
+            <li><a href="#" title="待整理">气象哲学 · 阴天大风与理性宁静</a></li>
+            <li><a href="#" title="待整理">玫瑰色辩证 · 理性狂欢</a></li>
+        </ul>
+    </div>
+
+    <div class="index-section">
+        <h4>【未竟 · 浪游】</h4>
+        <ul class="index-list">
+            <li><a href="#" title="待整理">硬件诗篇 · 传感器与情绪</a></li>
+            <li><a href="#" title="待整理">酒与提交 · 版本叙事学</a></li>
+        </ul>
+    </div>
+
+    <div style="margin-top: 1rem; font-size: 0.6rem; text-align: center; opacity: 0.6; border-top: 0.5px solid cyan; padding-top: 0.8rem;">
+        ⚡ 酸性故障内核 · 呼吸之间 ⚡
+    </div>
+</div>
 
 <script>
     const pieces = [
@@ -153,11 +423,11 @@
         const div = document.createElement('div');
         div.className = `drift-piece ${piece.layer}`;
         const titleLink = piece.link && piece.link !== '#' 
-            ? `<a href="${piece.link}" target="_blank">${piece.text}</a>` 
-            : `<span style="opacity:0.8;">${piece.text}</span>`;
+            ? `<a href="${piece.link}" target="_blank" style="color: inherit; text-decoration: none; border-bottom: 1px dotted cyan;">${piece.text}</a>` 
+            : `<span style="opacity:0.9;">${piece.text}</span>`;
         div.innerHTML = `
             <div style="font-size: 0.85rem; margin-bottom: 6px; font-weight: 500;">${titleLink}</div>
-            <div style="font-size: 0.7rem; color: #8a7a6a; line-height: 1.3;">${piece.desc}</div>
+            <div style="font-size: 0.7rem; color: #aaccff; line-height: 1.3;">${piece.desc}</div>
         `;
         div.style.position = 'absolute';
         div.style.visibility = 'hidden';
@@ -171,8 +441,8 @@
         div.style.left = `${x}px`;
         div.style.top = `${y}px`;
         div.style.visibility = 'visible';
-        const rotate = (Math.random() - 0.5) * 5;
-        div.style.transform = `rotate(${rotate}deg) skew(-2deg)`;
+        const rotate = (Math.random() - 0.5) * 6;
+        div.style.transform = `rotate(${rotate}deg) skew(-2deg) translateZ(0)`;
         
         container.appendChild(div);
         return { div, w, h, baseLeft: x, baseTop: y, layer: piece.layer };
@@ -206,8 +476,8 @@
     function startAutoDrift() {
         setInterval(() => {
             pieceElements.forEach(p => {
-                const deltaX = (Math.random() - 0.5) * 8;
-                const deltaY = (Math.random() - 0.5) * 6;
+                const deltaX = (Math.random() - 0.5) * 6;
+                const deltaY = (Math.random() - 0.5) * 5;
                 let newLeft = p.baseLeft + deltaX;
                 let newTop = p.baseTop + deltaY;
                 newLeft = Math.min(Math.max(newLeft, 10), winWidth - p.w - 10);
@@ -219,7 +489,7 @@
                 p.div.classList.add('animate-drift');
                 setTimeout(() => p.div.classList.remove('animate-drift'), 600);
             });
-        }, 4500);
+        }, 9000);
     }
 
     function addProximityGlow() {
@@ -231,7 +501,7 @@
                 const centerX = rect.left + rect.width/2;
                 const centerY = rect.top + rect.height/2;
                 const dist = Math.hypot(mouseX - centerX, mouseY - centerY);
-                if (dist < 120) {
+                if (dist < 130) {
                     p.div.classList.add('glow');
                 } else {
                     p.div.classList.remove('glow');
@@ -241,37 +511,36 @@
     }
 
     function addBlurOnClick() {
-        document.body.addEventListener('click', () => {
+        document.body.addEventListener('click', (e) => {
+            if (e.target.closest('.index-overlay') || e.target.closest('.index-trigger')) return;
             pieceElements.forEach(p => {
-                p.div.style.backdropFilter = 'blur(3px)';
+                p.div.style.filter = 'blur(2px)';
                 setTimeout(() => {
-                    p.div.style.backdropFilter = '';
-                }, 200);
+                    p.div.style.filter = '';
+                }, 150);
             });
         });
     }
 
-    function createDust() {
-        const dustCount = 80;
-        for (let i = 0; i < dustCount; i++) {
-            const dust = document.createElement('div');
-            dust.className = 'dust';
-            const size = Math.random() * 3 + 1;
-            dust.style.width = size + 'px';
-            dust.style.height = size + 'px';
-            dust.style.left = Math.random() * 100 + '%';
-            dust.style.top = Math.random() * 100 + '%';
-            dust.style.opacity = Math.random() * 0.3;
-            document.body.appendChild(dust);
-        }
-    }
+    const trigger = document.getElementById('indexTrigger');
+    const overlay = document.getElementById('indexOverlay');
+    const closeBtn = document.getElementById('closeIndex');
+
+    trigger.addEventListener('click', () => {
+        overlay.classList.toggle('active');
+    });
+    closeBtn.addEventListener('click', () => {
+        overlay.classList.remove('active');
+    });
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.classList.remove('active');
+    });
 
     function init() {
         layoutPieces();
         startAutoDrift();
         addProximityGlow();
         addBlurOnClick();
-        createDust();
         window.addEventListener('resize', () => {
             winWidth = window.innerWidth;
             winHeight = window.innerHeight;
